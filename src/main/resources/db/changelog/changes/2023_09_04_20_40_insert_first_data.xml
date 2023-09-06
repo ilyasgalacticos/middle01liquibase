@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="ilyas" id="insert-roles">
+        <insert tableName="tasks">
+            <column name="title" value="First Task"/>
+            <column name="description" value="Do First task"/>
+            <column name="date_created" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="date_modified" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="due_date" valueComputed="CURRENT_TIMESTAMP + INTERVAL '2 days'"/>
+            <column name="status" value = "NEW"/>
+            <column name="author_id" value = "0"/>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title" value="Second Task"/>
+            <column name="description" value="Do Second task"/>
+            <column name="date_created" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="date_modified" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="due_date" valueComputed="CURRENT_TIMESTAMP + INTERVAL '4 days'"/>
+            <column name="status" value = "NEW"/>
+            <column name="author_id" value = "0"/>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title" value="Third Task"/>
+            <column name="description" value="Do third task"/>
+            <column name="date_created" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="date_modified" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="due_date" valueComputed="CURRENT_TIMESTAMP + INTERVAL '3 days'"/>
+            <column name="status" value = "NEW"/>
+            <column name="author_id" value = "0"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

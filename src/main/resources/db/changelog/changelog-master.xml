@@ -3,30 +3,8 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-    <changeSet id="2023_09_04_19_30_create_tables" author="ilyas">
-        <sqlFile path="changes/2023_09_04_19_30_create_tables.sql"
-            relativeToChangelogFile="true"
-                 dbms="postgresql"
-                 endDelimiter=";"
-                 splitStatements="true"
-                 stripComments="true"/>
-    </changeSet>
+    <include file="db/changelog/changes/2023_09_04_19_30_create_tables.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/changes/2023_09_04_20_10_update_task_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/changes/2023_09_04_20_40_insert_first_data.xml" relativeToChangelogFile="false"/>
 
-    <changeSet id="2023_09_04_20_10_update_task_table" author="ilyas">
-        <sqlFile path="changes/2023_09_04_20_10_update_task_table.sql"
-                 relativeToChangelogFile="true"
-                 dbms="postgresql"
-                 endDelimiter=";"
-                 splitStatements="true"
-                 stripComments="true"/>
-    </changeSet>
-
-    <changeSet id="2023_09_04_20_40_insert_first_data" author="ilyas">
-        <sqlFile path="changes/2023_09_04_20_40_insert_first_data.sql"
-                 relativeToChangelogFile="true"
-                 dbms="postgresql"
-                 endDelimiter=";"
-                 splitStatements="true"
-                 stripComments="true"/>
-    </changeSet>
 </databaseChangeLog>
