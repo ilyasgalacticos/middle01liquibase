@@ -1,6 +1,9 @@
 package kz.middle.middle01liquibase.service.impl;
 
 import kz.middle.middle01liquibase.dto.TaskDto;
+import kz.middle.middle01liquibase.dto.UserDto;
+import kz.middle.middle01liquibase.exceptions.UserNotFoundException;
+import kz.middle.middle01liquibase.feign.UserFeignClient;
 import kz.middle.middle01liquibase.mapper.TaskMapper;
 import kz.middle.middle01liquibase.model.Task;
 import kz.middle.middle01liquibase.repository.TaskRepository;
@@ -8,6 +11,10 @@ import kz.middle.middle01liquibase.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.List;
 
 @Service
@@ -16,6 +23,7 @@ public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
+    private final UserFeignClient userFeignClient;
 
     @Override
     public List<TaskDto> getTasks() {
@@ -29,12 +37,22 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDto addTask(TaskDto task) {
-        return taskMapper.toDto(taskRepository.save(taskMapper.toEntity(task)));
+        UserDto userDto = userFeignClient.getUser(task.getAuthorId());
+        if(userDto!=null){
+            task.setDateCreated(LocalDateTime.now());
+            task.setStatus("NEW");
+            return taskMapper.toDto(taskRepository.save(taskMapper.toEntity(task)));
+        }
+        throw new UserNotFoundException(task.getAuthorId());
     }
 
     @Override
     public TaskDto updateTask(TaskDto task) {
-        return taskMapper.toDto(taskRepository.save(taskMapper.toEntity(task)));
+        UserDto userDto = userFeignClient.getUser(task.getAuthorId());
+        if(userDto!=null) {
+            return taskMapper.toDto(taskRepository.save(taskMapper.toEntity(task)));
+        }
+        throw new UserNotFoundException(task.getAuthorId());
     }
 
     @Override
