@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-attachment-table" author="ilyas">
+        <createTable tableName="attachment_files">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="path" type="TEXT"/>
+            <column name="date_created" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="date_modified" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="task_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-constraint-for-attachment-task-id" author="ilyas">
+        <addForeignKeyConstraint  baseColumnNames="task_id"
+                                  baseTableName="attachment_files"
+                                  constraintName="fk_attachment_task_id"
+                                  referencedColumnNames="id"
+                                  referencedTableName="tasks"
+                                  validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>

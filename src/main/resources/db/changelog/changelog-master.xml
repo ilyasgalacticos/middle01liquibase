@@ -5,6 +5,6 @@
 
     <include file="db/changelog/changes/2023_09_04_19_30_create_tables.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/changes/2023_09_04_20_10_update_task_table.xml" relativeToChangelogFile="false"/>
-    <include file="db/changelog/changes/2023_09_04_20_40_insert_first_data.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/changes/2023_09_25_19_30_create_attachment_table.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
